@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const pg = require('pg');
+// const pg = require('pg');
 // use pool as a module stored in this directory
 const pool = require('../modules/pool');
 
