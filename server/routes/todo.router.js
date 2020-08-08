@@ -5,7 +5,7 @@ const router = express.Router();
 const pool = require('../modules/pool');
 
 
-
+/* 
 // CREATE -- (post) -- (insert into)
 let queryText = `
     INSERT INTO "koalas"
@@ -37,4 +37,4 @@ let queryText = `
 let queryText = `
     DELETE FROM "koalas"
     WHERE "completed"
-`
+` */
