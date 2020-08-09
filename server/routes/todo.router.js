@@ -28,7 +28,7 @@ router.post('/', (req, res) => {
 router.get('/', (req, res) => {
     // SELECT * FROM "tasks" ORDER BY "entered";
     let queryText = `
-        SELECT * FROM "tasks";        
+        SELECT * FROM "tasks" ORDER BY "id";        
     `;
     pool.query(queryText).then(result => {
         res.send(result.rows);
@@ -41,13 +41,67 @@ router.get('/', (req, res) => {
 /*
 // UPDATE -- (put) -- (update set)
 let queryText = `
-    UPDATE "koalas"
-    SET "completed" = transaction_timestamp);
-    WHERE id = $1;
 `;
+*/
+router.put('/complete/:id', (req, res) => {
+    let queryText = `
+    UPDATE "tasks"
+    SET "completed" = transaction_timestamp()
+    WHERE id = $1;
+    `;
+    pool.query(queryText, [req.params.id]).then(result => {
+        res.sendStatus(200);
+    }).catch(error => {
+        console.log('error in router put complete', error);
+        res.sendStatus(500);
+    });
+});
 
+router.put('/incomplete/:id', (req, res) => {
+    let queryText = `
+    UPDATE "tasks"
+    SET "completed" = NULL
+    WHERE id = $1;
+    `;
+    pool.query(queryText, [req.params.id]).then(result => {
+        res.sendStatus(200);
+    }).catch(error => {
+        console.log('error in router put incomplete', error);
+        res.sendStatus(500);
+    });
+});
+/*
 // DELETE -- (delete) -- (delete from)
 // delete single entry
+*/
+
+router.delete('/:id', (req, res) => {
+    let queryText = `
+        DELETE FROM "tasks"
+        WHERE "id" = $1;
+    `;
+    pool.query(queryText, [req.params.id]).then(result => {
+        res.sendStatus(200);
+    }).catch(error => {
+        console.log('error in router.delete', error);
+        res.sendStatus(500);
+    });
+});
+
+router.delete('/delete/completed', (req, res) => {
+    let queryText = `
+        DELETE FROM "tasks"
+        WHERE "completed" IS NOT NULL;
+    `;
+    pool.query(queryText).then(result => {
+        res.sendStatus(200);
+    }).catch(error => {
+        console.log('error in router delete all', error);
+        res.sendStatus(500);
+    });
+})
+
+/*
 let queryText = `
     DELETE FROM "koalas"
     WHERE "id" = $1;

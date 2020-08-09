@@ -9,6 +9,8 @@ app.use(express.static('server/public'));
 
 // ROUTES
 app.use('/tasks', router);
+app.use('/', router);
+
 
 // LISTENING
 app.listen(PORT, () => {
