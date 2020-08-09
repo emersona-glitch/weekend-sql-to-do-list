@@ -1,4 +1,6 @@
 header {
+    margin: 20px;
+    padding: 7px;
     background-color: cadetblue;
 }
 
@@ -7,17 +9,33 @@ main {
 }
 
 footer {
+    margin: 20px;
+    padding: 7px;
     background-color: palevioletred;
 }
 
-#inputs {
+#taskInput {
+    margin: 20px;
+    padding: 7px;
+    background-color: darkkhaki;
+}
+
+#descriptionInput {
+    margin: 20px;
+    padding: 7px;
     background-color: darkkhaki;
 }
 
 #feedback {
+    margin: 20px;
+    padding: 7px;
     background-color: plum;
 }
 
 .green {
     background-color: lightgreen;
+}
+
+table {
+    border: 3px, solid, black;
 }

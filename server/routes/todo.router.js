@@ -13,11 +13,12 @@ router.post('/', (req, res) => {
         ("name", "description", "entered")
     VALUES
         ($1, $2, transaction_timestamp());
-    `;
+    `;  // we feed our information from req.body into the queryText 
+        // by using sanitized inputs, to prevent any malicious
+        // entries from being evaluated by our postgres
     pool.query(queryText, [req.body.name,
                            req.body.description]).then(result => {
         res.sendStatus(201);
-        // console.log(result);
     }).catch((error) => {
         console.log('error in router post:', error);
         res.sendStatus(500);
@@ -26,10 +27,13 @@ router.post('/', (req, res) => {
 
 // READ -- (get) -- (select from)
 router.get('/', (req, res) => {
-    // SELECT * FROM "tasks" ORDER BY "entered";
     let queryText = `
         SELECT * FROM "tasks" ORDER BY "id";        
     `;
+    // we want to order our list of tasks by id, which is also
+    // a function of the order in which they were created. We
+    // do this to keep everything appearing consistently on the
+    // dom and so it won't move around as we change other values.
     pool.query(queryText).then(result => {
         res.send(result.rows);
     }).catch(error => {
@@ -38,11 +42,8 @@ router.get('/', (req, res) => {
     });
 });
 
-/*
+
 // UPDATE -- (put) -- (update set)
-let queryText = `
-`;
-*/
 router.put('/complete/:id', (req, res) => {
     let queryText = `
     UPDATE "tasks"
@@ -70,11 +71,8 @@ router.put('/incomplete/:id', (req, res) => {
         res.sendStatus(500);
     });
 });
-/*
-// DELETE -- (delete) -- (delete from)
-// delete single entry
-*/
 
+// DELETE -- (delete) -- (delete from)
 router.delete('/:id', (req, res) => {
     let queryText = `
         DELETE FROM "tasks"
@@ -88,6 +86,9 @@ router.delete('/:id', (req, res) => {
     });
 });
 
+// We call a special url when we want to delete all entries
+// in our database that have been completed, i.e. all those
+// entries where their completed column is not NULL
 router.delete('/delete/completed', (req, res) => {
     let queryText = `
         DELETE FROM "tasks"
@@ -101,15 +102,4 @@ router.delete('/delete/completed', (req, res) => {
     });
 })
 
-/*
-let queryText = `
-    DELETE FROM "koalas"
-    WHERE "id" = $1;
-`;
-
-// delete completed entries
-let queryText = `
-    DELETE FROM "koalas"
-    WHERE "completed"
-` */
 module.exports = router;
