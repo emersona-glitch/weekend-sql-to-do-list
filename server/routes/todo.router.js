@@ -6,17 +6,25 @@ const router = express.Router();
 const pool = require('../modules/pool');
 
 
-/* 
 // CREATE -- (post) -- (insert into)
-let queryText = `
-    INSERT INTO "koalas"
-        ("name", "name", "description", "entered")
+router.post('/', (req, res) => {
+    let queryText = `
+    INSERT INTO "tasks"
+        ("name", "description", "entered")
     VALUES
-        ($1, $2, $3, transaction_timestamp);
-`;
-*/
-// READ -- (get) -- (select from)
+        ($1, $2, transaction_timestamp());
+    `;
+    pool.query(queryText, [req.body.name,
+                           req.body.description]).then(result => {
+        res.sendStatus(201);
+        // console.log(result);
+    }).catch((error) => {
+        console.log('error in router post:', error);
+        res.sendStatus(500);
+    })
+});
 
+// READ -- (get) -- (select from)
 router.get('/', (req, res) => {
     // SELECT * FROM "tasks" ORDER BY "entered";
     let queryText = `
@@ -28,9 +36,7 @@ router.get('/', (req, res) => {
         console.log('error in router get', error);
         res.sendStatus(500);
     });
-})
-
-module.exports = router;
+});
 
 /*
 // UPDATE -- (put) -- (update set)
@@ -52,3 +58,4 @@ let queryText = `
     DELETE FROM "koalas"
     WHERE "completed"
 ` */
+module.exports = router;

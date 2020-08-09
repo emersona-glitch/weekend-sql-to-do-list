@@ -1,23 +1,45 @@
-$(document).ready( onReady );
+$(document).ready(onReady);
 // Perform all of these functions on document load
-function onReady () {
+function onReady() {
     clickListeners();
     getTasks();
 }
 
 // All click listeners collected in one place!
-function clickListeners () {
+function clickListeners() {
     $('#submitButton').on('click', submitTask)
 }
 
 
 
-function submitTask () {
-    
-    getTasks();
+function submitTask() {
+
+    const sendData = packageObject();
+    $.ajax({
+        method: 'POST',
+        url: '/tasks',
+        data: sendData
+    }).then(function (response) {
+        console.log(response);
+        getTasks();
+    }).catch(function (error) {
+        console.log('error in submitTask()', error);
+    });
+    $('#taskInput').val('');
+    $('#descriptionInput').val('');
+
 }
 
-function getTasks () {
+function packageObject() {
+
+    return {
+        name: $('#taskInput').val(),
+        description: $('#descriptionInput').val(),
+    };
+
+}
+
+function getTasks() {
     $.ajax({
         method: 'GET',
         url: '/tasks'
@@ -28,7 +50,7 @@ function getTasks () {
     })
 }
 
-function appendData (input) {
+function appendData(input) {
     $('#feedback').empty();
     let completed = '';
     if (input.completed = 'NULL') {
@@ -36,7 +58,7 @@ function appendData (input) {
     } else {
         completed = input.completed;
     }
-    for (let i=0; i<input.length; i++) {
+    for (let i = 0; i < input.length; i++) {
         $('#feedback').append(`
         <tr data-id="">
         <td>${input[i].name}</td>
@@ -48,6 +70,4 @@ function appendData (input) {
         </tr>
         `)
     }
-    $('#taskInput').val('');
-    $('#descriptionInput').val('');
 }
