@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 // const pg = require('pg');
 // use pool as a module stored in this directory
+
 const pool = require('../modules/pool');
 
 
@@ -13,12 +14,25 @@ let queryText = `
     VALUES
         ($1, $2, $3, transaction_timestamp);
 `;
-
+*/
 // READ -- (get) -- (select from)
-let queryText = `
-    SELECT * FROM "tasks" ORDER BY "entered";
-`;
 
+router.get('/', (req, res) => {
+    // SELECT * FROM "tasks" ORDER BY "entered";
+    let queryText = `
+        SELECT * FROM "tasks";        
+    `;
+    pool.query(queryText).then(result => {
+        res.send(result.rows);
+    }).catch(error => {
+        console.log('error in router get', error);
+        res.sendStatus(500);
+    });
+})
+
+module.exports = router;
+
+/*
 // UPDATE -- (put) -- (update set)
 let queryText = `
     UPDATE "koalas"

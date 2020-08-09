@@ -23,25 +23,28 @@ function getTasks () {
         url: '/tasks'
     }).then(function (response) {
         appendData(response);
-    })catch(function (error) {
+    }).catch(function (error) {
         console.log('error in getTasks');
     })
 }
 
 function appendData (input) {
     $('#feedback').empty();
+    let completed = '';
     if (input.completed = 'NULL') {
-        const completed = 'Not complete'
+        completed = 'Not complete';
+    } else {
+        completed = input.completed;
     }
     for (let i=0; i<input.length; i++) {
         $('#feedback').append(`
         <tr data-id="">
-        <td>${input.name}</td>
-        <td>${input.description}</td>
-        <td>${input.entered}</td>
+        <td>${input[i].name}</td>
+        <td>${input[i].description}</td>
+        <td>${input[i].entered}</td>
         <td>${completed}</td>
-        <td><button id="completeButton"></button</td>
-        <td><button id="deleteButton"></button</td>
+        <td><button id="completeButton">Mark as Completed</button</td>
+        <td><button id="deleteButton">Delete Task</button</td>
         </tr>
         `)
     }
