@@ -3,7 +3,7 @@ const pg = require('pg');
 let config = {}
 
 if (process.env.DATABASE_URL) {
-    const params = ulr.pars(process.env.DATABASE_URL);
+    const params = url.parse(process.env.DATABASE_URL);
     const auth = params.auth.split(':');
     
     config = {
@@ -12,7 +12,8 @@ if (process.env.DATABASE_URL) {
         host: params.hostname,
         port: params.port,
         database: params.pathname.split('/')[1],
-        ssl: true,
+        ssl: { rejectUnauthorized: false },
+        // ssl: true,
         max: 10,
         idleTimeoutMillis: 30000
     };
