@@ -1,12 +1,31 @@
 const pg = require('pg');
 
-const config = {
-    database: 'weekend-to-do-app',
-    host: 'localhost',
-    port: 5432,
-    max: 10,
-    idleTimeoutMillis: 10000
+let config = {}
+
+if (process.env.DATABASE_URL) {
+    const params = ulr.pars(process.env.DATABASE_URL);
+    const auth = params.auth.split(':');
+    
+    config = {
+        user: auth[0],
+        password: auth[1],
+        host: params.hostname,
+        port: params.port,
+        database: params.pathname.split('/')[1],
+        ssl: true,
+        max: 10,
+        idleTimeoutMillis: 30000
+    };
+} else {
+    const config = {
+        database: 'weekend-to-do-app',
+        host: 'localhost',
+        port: 5432,
+        max: 10,
+        idleTimeoutMillis: 10000
+    }
 }
+
 
 const pool = new pg.Pool(config);
 
