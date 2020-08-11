@@ -1,8 +1,8 @@
 const pg = require('pg');
 const url = require('url');
+const pool = pg.Pool;
 
 let config = {}
-
 if (process.env.DATABASE_URL) {
     const params = url.parse(process.env.DATABASE_URL);
     const auth = params.auth.split(':');
@@ -19,7 +19,7 @@ if (process.env.DATABASE_URL) {
         idleTimeoutMillis: 30000
     };
 } else {
-    const config = {
+    config = {
         database: 'weekend-to-do-app',
         host: 'localhost',
         port: 5432,
@@ -29,7 +29,7 @@ if (process.env.DATABASE_URL) {
 }
 
 
-const pool = new pg.Pool(config);
+// const pool = new pg.Pool(config);
 
 pool.on('connect', () => {
     console.log('connected to postgres');
