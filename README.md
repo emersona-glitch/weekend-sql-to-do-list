@@ -33,7 +33,7 @@ You will need [Node.js](https://nodejs.org/en/) and the node package manager to 
 3. Tasks are marked as 'Not Complete' by default.
 4. Once complete, the user can mark them as 'Complete' by clicking on the item's 'Mark as Completed' button.
 5. If the user wishes, they can delete all tasks that have been completed by clicking on the 'Delete all Completed Tasks'
-6. Individual items can be deleted individually by using their 'Delete' button.
+6. Individual items can be deleted by using their 'Delete' button.
 
 ## Built With
 
