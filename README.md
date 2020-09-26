@@ -1,6 +1,6 @@
-![MIT LICENSE](https://img.shields.io/github/license/scottbromander/the_marketplace.svg?style=flat-square)
-![REPO SIZE](https://img.shields.io/github/repo-size/scottbromander/the_marketplace.svg?style=flat-square)
-![TOP_LANGUAGE](https://img.shields.io/github/languages/top/scottbromander/the_marketplace.svg?style=flat-square)
+![MIT LICENSE](https://img.shields.io/github/license/emersona-glitch/weekend-sql-to-do-list.svg?style=flat-square)
+![REPO SIZE](https://img.shields.io/github/repo-size/emersona-glitch/weekend-sql-to-do-list.svg?style=flat-square)
+![TOP_LANGUAGE](https://img.shields.io/github/languages/top/emersona-glitch/weekend-sql-to-do-list.svg?style=flat-square)
 ![FORKS](https://img.shields.io/github/forks/emersona-glitch/weekend-sql-to-do-list.svg?style=social)
 
 # SQL TO-DO LIST
