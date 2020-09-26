@@ -6,15 +6,3 @@ CREATE TABLE "tasks"
 "entered" DATE NOT NULL,		--get 'this' date
 "completed" DATE				--when null, == 'not completed'
 );
-
--- INSERT INTO "tasks"
--- 	( "name", "description", "entered")
--- VALUES
--- 	( 'testing', 'this is a test', transaction_timestamp() );
-
---SELECT CURRENT_TIMESTAMP;
---SELECT now();
---SELECT TIMESTAMP 'now';
---SELECT transaction_timestamp()
-
-

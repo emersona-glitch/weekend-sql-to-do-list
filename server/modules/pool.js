@@ -1,6 +1,6 @@
 const pg = require('pg');
 const url = require('url');
-const pool = pg.Pool;
+// const pool = pg.Pool;
 
 let config = {}
 if (process.env.DATABASE_URL) {
@@ -29,7 +29,7 @@ if (process.env.DATABASE_URL) {
 }
 
 
-// const pool = new pg.Pool(config);
+const pool = new pg.Pool(config);
 
 pool.on('connect', () => {
     console.log('connected to postgres');
