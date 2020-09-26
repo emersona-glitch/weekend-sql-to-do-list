@@ -43,7 +43,7 @@ Link to software that is required to install the app (e.g. node).
 Node, Javascript, Express, PostgresQL
 
 ## Acknowledgement
-Thanks to [Prime Digital Academy](www.primeacademy.io) who gave me the training and guidance to complete this project. Special thanks to Dane Smith, my instructor!
+Thanks to [Prime Digital Academy](www.primeacademy.io) who gave me the training and guidance to complete this project. Special thanks to [Dane Smith](https://github.com/DoctorHowser), my instructor!
 
 ## Support
-If you have suggestions or issues, please email [emerson.aagaard@gmail.com](me)!
+If you have suggestions or issues, please email [emerson.aagaard@gmail.com](emerson.aagaard@gmail.com)!
