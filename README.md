@@ -13,10 +13,7 @@ With this project, I set out to make a to-do list application based on the techn
 
 ### Prerequisites
 
-Link to software that is required to install the app (e.g. node).
-
-- [Node.js](https://nodejs.org/en/)
-- List other prerequisites here
+You will need [Node.js](https://nodejs.org/en/) and the node package manager to install dependencies for this app.
 
 ## Installation
 
